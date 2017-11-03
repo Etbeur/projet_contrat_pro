@@ -1,0 +1,33 @@
+<div class="col-md-3 left_col">
+    <div class="left_col scroll-view">
+        <div class="navbar nav_title" >
+            <a href="" class="site_title"><i class="fa fa-paw"></i> <span>Administration</span></a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <br />
+
+        <!-- sidebar menu -->
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+                <ul class="nav side-menu">
+                    <li>
+                        <a href="{{ path('dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
+                    </li>
+                    <li><a><i class="fa fa-edit"></i> Blog <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{ path('admin_user_index') }}">Utilisateurs</a></li>
+                            <li><a href="{{ path('admin_event_index') }}">Evénements</a></li>
+                            <li><a href="{{ path('admin_adress_index') }}">Adresses</a></li>
+                            <li><a href="{{ path('admin_category_index') }}">Catégories</a></li>
+                            <li><a href="{{ path('admin_commentary_index') }}">Commentaires</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- /sidebar menu -->
+    </div>
+</div>

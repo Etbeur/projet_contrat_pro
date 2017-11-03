@@ -2,15 +2,17 @@
 
 namespace AppBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
  *
- * @ORM\Table(name="user")
+ * @ORM\Table(name="`user`")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User
+class User extends BaseUser
 {
     /**
      * @var int
@@ -19,7 +21,7 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -36,13 +38,6 @@ class User
     private $lastName;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="pseudo", type="string", length=255)
-     */
-    private $pseudo;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="age", type="integer")
@@ -52,17 +47,20 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @Assert\Blank
      */
     private $image;
 
     /**
-     * @var string
+     * Test role
      *
-     * @ORM\Column(name="role", type="string", length=255)
      */
-    private $role;
-
+    public function __construct()
+    {
+        parent::__construct();
+        $this->roles = array('ROLE_USER');
+    }
 
     /**
      * Get id
@@ -123,30 +121,6 @@ class User
     }
 
     /**
-     * Set pseudo
-     *
-     * @param string $pseudo
-     *
-     * @return User
-     */
-    public function setPseudo($pseudo)
-    {
-        $this->pseudo = $pseudo;
-
-        return $this;
-    }
-
-    /**
-     * Get pseudo
-     *
-     * @return string
-     */
-    public function getPseudo()
-    {
-        return $this->pseudo;
-    }
-
-    /**
      * Set age
      *
      * @param integer $age
@@ -192,30 +166,6 @@ class User
     public function getImage()
     {
         return $this->image;
-    }
-
-    /**
-     * Set role
-     *
-     * @param string $role
-     *
-     * @return User
-     */
-    public function setRole($role)
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
-    /**
-     * Get role
-     *
-     * @return string
-     */
-    public function getRole()
-    {
-        return $this->role;
     }
 }
 

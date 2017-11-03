@@ -1,0 +1,51 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block content %}
+<div class="page-title">
+    <div class="title_left">
+        <h3>Adress <small></small></h3>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ adress.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Number</th>
+                            <td>{{ adress.number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Street</th>
+                            <td>{{ adress.street }}</td>
+                        </tr>
+                        <tr>
+                            <th>City</th>
+                            <td>{{ adress.city }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <a href="{{ path('admin_adress_index') }}" class="btn btn-primary">Retour à la liste</a>
+                        <a href="{{ path('adress_edit', { 'id': adress.id }) }}" class="btn btn-primary">Modifier</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{ form_start(delete_form) }}
+        <input type="submit" value="Supprimer" class="btn btn-danger pull-right">
+        {{ form_end(delete_form) }}
+    </div>
+</div>
+{% endblock %}

@@ -43,6 +43,15 @@ class Event
     private $date;
 
     /**
+     * constructor for date
+     *
+     */
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+
+    /**
      * @var string
      *
      * @ORM\Column(name="category", type="string", length=255)
@@ -115,7 +124,7 @@ class Event
      *
      * @return Event
      */
-    public function setDate($date)
+    public function setDate(\DateTime $date = NULL)
     {
         $this->date = $date;
 

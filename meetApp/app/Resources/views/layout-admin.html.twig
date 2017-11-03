@@ -1,0 +1,21 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block bodyclass %}nav-md{% endblock %}
+{% block body %}
+    <div class="container body">
+        <div class="main_container">
+
+            {% include 'admin-sidebar.html.twig' %}
+
+            {% include 'admin-topbar.html.twig' %}
+
+            <div class="right_col" role="main">
+                <div class="">
+                    {% block content %}
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

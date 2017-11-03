@@ -1,0 +1,80 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block content %}
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Utilisateurs <small>Création</small></h3>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <div class="x_panel">
+                <div class="x_content">
+                    {{ form_start(form, {attr: {'class': 'form-horizontal form-label-left'}}) }}
+
+                    <div class="form-group">
+                        {{ form_label(form.email, null, {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_widget(form.email, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'placeholder': 'example: monthypython@gmail.com'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.username, null, {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_widget(form.username, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'placeholder': 'example: KingPyMy'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.plainPassword.first, null, {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'placeholder': 'Password'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.plainPassword.second, null, {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'placeholder': 'Password Confirmation'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.firstName, null, {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_widget(form.firstName, {'attr': {'class': 'form-control col-md-7 col-xs-9', 'placeholder': 'example: Monthy'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.lastName, null, {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_widget(form.lastName, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'placeholder': 'example: Python'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.age, null, {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_widget(form.age, {'attr': {'class': 'form-control', 'placeholder': 'example: 24'}}) }}
+                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <a href="{{ path('admin_user_index') }}" class="btn btn-primary pull-left" >Retour à la liste</a>
+                            <input type="submit" value="Créer" class="btn btn-success" />
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
