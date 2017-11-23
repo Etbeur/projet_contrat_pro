@@ -46,7 +46,6 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
 //            // $file stores the uploaded image file
 //            $file = $user->getImage();
 //

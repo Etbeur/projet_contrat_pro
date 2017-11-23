@@ -53,11 +53,31 @@ class Event
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="category", type="string", length=255)
+     * Many Event have One category
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="event")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
 
+    /**
+     * Many Event have One User
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="event")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * One Event has One Adress
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Adress", inversedBy="event")
+     * @ORM\JoinColumn(name="adress_id", referencedColumnName="id")
+     */
+    private $adress;
+
+    /**
+     * One Event has Many Commentary
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Commentary", mappedBy="event")
+     */
+    private $commentary;
 
     /**
      * Get id
@@ -124,7 +144,7 @@ class Event
      *
      * @return Event
      */
-    public function setDate(\DateTime $date = NULL)
+    public function setDate(\DateTime $date = null)
     {
         $this->date = $date;
 
@@ -164,5 +184,52 @@ class Event
     {
         return $this->category;
     }
-}
 
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAdress()
+    {
+        return $this->adress;
+    }
+
+    /**
+     * @param mixed $adress
+     */
+    public function setAdress($adress)
+    {
+        $this->adress = $adress;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommentary()
+    {
+        return $this->commentary;
+    }
+
+    /**
+     * @param mixed $commentary
+     */
+    public function setCommentary($commentary)
+    {
+        $this->commentary = $commentary;
+    }
+}

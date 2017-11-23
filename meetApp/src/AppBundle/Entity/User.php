@@ -53,6 +53,24 @@ class User extends BaseUser
     private $image;
 
     /**
+     * One User has Many Event
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Event", mappedBy="user")
+     */
+    private $event;
+
+    /**
+     * One User has Many Adress
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Adress", mappedBy="user")
+     */
+    private $adress;
+
+    /**
+     * One User has Many Commentary
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Commentary", mappedBy="user")
+     */
+    private $commentary;
+
+    /**
      * Test role
      *
      */
@@ -166,6 +184,54 @@ class User extends BaseUser
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * @param mixed $event
+     */
+    public function setEvent($event)
+    {
+        $this->event = $event;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAdress()
+    {
+        return $this->adress;
+    }
+
+    /**
+     * @param mixed $adress
+     */
+    public function setAdress($adress)
+    {
+        $this->adress = $adress;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommentary()
+    {
+        return $this->commentary;
+    }
+
+    /**
+     * @param mixed $commentary
+     */
+    public function setCommentary($commentary)
+    {
+        $this->commentary = $commentary;
     }
 }
 

@@ -1,5 +1,8 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{% extends "::base-admin.html.twig" %}
 
-{% block fos_user_content %}
-{% include "@FOSUser/Resetting/request_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block bodyclass %}login{% endblock %}
+{% block body %}
+    {% block fos_user_content %}
+        {% include "@FOSUser/Resetting/request_content.html.twig" %}
+    {% endblock fos_user_content %}
+{% endblock body %}

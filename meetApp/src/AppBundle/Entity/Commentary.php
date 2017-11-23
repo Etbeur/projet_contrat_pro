@@ -42,6 +42,19 @@ class Commentary
      */
     private $date;
 
+    /**
+     * Many Commentary have one User
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="commentary")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * Many Commentary have one Event
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event", inversedBy="commentary")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     */
+    private $event;
 
     /**
      * Get id
@@ -123,6 +136,38 @@ class Commentary
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * @param mixed $event
+     */
+    public function setEvent($event)
+    {
+        $this->event = $event;
     }
 }
 

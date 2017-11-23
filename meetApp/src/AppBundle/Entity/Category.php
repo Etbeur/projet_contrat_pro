@@ -35,6 +35,11 @@ class Category
      */
     private $style;
 
+    /**
+     * One Category has Many Event
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Event", mappedBy="category")
+     */
+    private $event;
 
     /**
      * Get id
@@ -92,6 +97,22 @@ class Category
     public function getStyle()
     {
         return $this->style;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * @param mixed $event
+     */
+    public function setEvent($event)
+    {
+        $this->event = $event;
     }
 }
 

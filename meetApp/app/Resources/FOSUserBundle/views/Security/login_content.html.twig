@@ -9,15 +9,18 @@
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
                 {% endif %}
 
-                <h1>Connexion</h1>
+                <p class="h2 text-center mb-4">Sign in <a class="h5" href="/register">Pas encore de compte?</a></p>
+                <a href="{{ path('homePage') }}" class="">Back to Home</a>
                 <div>
+                    <i class="fa fa-envelope prefix grey-text"></i>
                     <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control" placeholder="Username" />
                 </div>
                 <div>
+                    <i class="fa fa-lock prefix grey-text"></i>
                     <input type="password" id="password" name="_password" required="required" class="form-control" placeholder="Password" />
                 </div>
                 <div>
-                    <button type="submit" id="_submit" class="btn btn-default submit" name="_submit">{{ 'security.login.submit'|trans }}</button>
+                    <button type="submit" id="_submit" class="btn btn-default submit text-justify   " name="_submit">{{ 'Login' }}</button>
                     <a class="reset_pass" href="{{ path('fos_user_resetting_request') }}">Mot de passe perdu ?</a>
                 </div>
 
@@ -29,7 +32,6 @@
 
                 <div class="separator">
                     <div>
-                        <h1><i class="fa fa-paw"></i> Administration</h1>
                         <p>©2017 All Rights Reserved. Romain ETHEVE</p>
                     </div>
                 </div>
