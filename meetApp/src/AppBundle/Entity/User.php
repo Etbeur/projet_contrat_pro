@@ -2,8 +2,10 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -53,10 +55,14 @@ class User extends BaseUser
     private $image;
 
     /**
-     * One User has Many Event
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Event", mappedBy="user")
+     * Many Users has Many Events
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Event", inversedBy="users")
+     * @ORM\JoinTable(name="booking")
+     *
+     * One user has zero or many events
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Event", mappedBy="users")
      */
-    private $event;
+    private $events;
 
     /**
      * One User has Many Adress
@@ -78,6 +84,7 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->roles = array('ROLE_USER');
+        $this->events = new ArrayCollection();
     }
 
     /**
@@ -189,22 +196,6 @@ class User extends BaseUser
     /**
      * @return mixed
      */
-    public function getEvent()
-    {
-        return $this->event;
-    }
-
-    /**
-     * @param mixed $event
-     */
-    public function setEvent($event)
-    {
-        $this->event = $event;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getAdress()
     {
         return $this->adress;
@@ -233,5 +224,49 @@ class User extends BaseUser
     {
         $this->commentary = $commentary;
     }
+
+    /**
+     *Add Event
+     *
+     * @param Event $events
+     *
+     * @return Event
+     */
+    public function addEvent(Event $events)
+    {
+        $this->events[] = $events;
+        return $events;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param Event $events
+     *
+     * @internal param Event $event
+     */
+    public function removeEvent(Event $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Get  events
+     * @return ArrayCollection
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * @param mixed $events
+     */
+    public function setEvents($events)
+    {
+        $this->events = $events;
+    }
+
+
 }
 

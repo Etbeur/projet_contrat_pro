@@ -23,6 +23,7 @@
                                 <th>Username</th>
                                 <th>Age</th>
                                 <th>Image</th>
+                                <th>Compte Actif</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -35,6 +36,7 @@
                                 <td>{{ user.username }}</td>
                                 <td>{{ user.age }}</td>
                                 <td>{{ user.image }}</td>
+                                <td>{{ user.enabled }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -57,11 +59,11 @@
                 </div>
             </div>
         </div>
-        <ul>
-            <li>
-                <a class="btn btn-primary" href="{{ path('user_new') }}">Create a new user</a>
-            </li>
-        </ul>
+        {#<ul>#}
+            {#<li>#}
+                {#<a class="btn btn-primary" href="{{ path('user_new') }}">Create a new user</a>#}
+            {#</li>#}
+        {#</ul>#}
     </div>
 {% endblock %}
 

@@ -29,13 +29,6 @@ class Category
     private $name;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="style", type="string", length=255)
-     */
-    private $style;
-
-    /**
      * One Category has Many Event
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Event", mappedBy="category")
      */
@@ -49,6 +42,14 @@ class Category
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * To string method
+     */
+    public function __toString()
+    {
+        return $this->name;
     }
 
     /**
@@ -73,30 +74,6 @@ class Category
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set style
-     *
-     * @param string $style
-     *
-     * @return Category
-     */
-    public function setStyle($style)
-    {
-        $this->style = $style;
-
-        return $this;
-    }
-
-    /**
-     * Get style
-     *
-     * @return string
-     */
-    public function getStyle()
-    {
-        return $this->style;
     }
 
     /**

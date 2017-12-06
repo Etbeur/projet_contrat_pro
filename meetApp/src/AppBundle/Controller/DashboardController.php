@@ -24,11 +24,12 @@ class DashboardController extends Controller
 //        $nbCategory   = $em->getRepository('AppBundle:Category')->findAll();
 //        $nbCommentary   = $em->getRepository('AppBundle:Commentary')->findAll();
 //        $nbMessage   = $em->getRepository('AppBundle:Message')->findAll();
-//        $nbEvent   = $em->getRepository('AppBundle:Event')->findAll();
+        $nbEvents   = $em->getRepository('AppBundle:Event')->findAll();
         $nbUsers = $em->getRepository('AppBundle:User')->findAll();
 
         return $this->render('admin/dashboard/index.html.twig', [
-            'nbUsers' => $nbUsers
+            'nbUsers' => $nbUsers,
+            'nbEvents' => $nbEvents
         ]);
     }
 }

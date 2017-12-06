@@ -1,9 +1,49 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% include 'front-topbar.html.twig' %}
-    {#NavBar#}
-    {% block content %}
-    {% endblock %}
 
+    {% include 'front-topbar.html.twig' %}
+
+    {% block content %}
+
+        <div class="col-md-12 text-center">
+            <p>Bienvenue sur ce site d'évènements de rencontres <strong>{{ app.user }}</strong>. Ce site vous permet d'organiser ou de participer à des évènements afin de rencontrer d'autre personnes.</p>
+            <p>Rendez-vous dans l'onglet évènement pour voir les différents évènements disponible.</p>
+
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') and not is_granted('ROLE_ADMIN') %}
+             <div class="row event-card">
+                     <h2 class="text-center col-md-12">Voici vos évènement créés</h2>
+                     {% for event in events %}
+                         {% if event.users == app.user %}
+                             <div class="col-md-4">
+                                 <div class="card">
+                                     <div class="card-block">
+                                         <p><strong>Event:</strong> {{ event.name }}</p>
+                                         <p><strong>Place:</strong> {{ event.place }}</p>
+                                         <p><strong>Category:</strong> {{ event.category }}</p>
+                                         <p><strong>Organiser:</strong> {{ event.users }}</p>
+                                         <p><strong>Date:</strong> {{ event.date|date('d/m/Y H:i:s') }}</p>
+                                         <button class="event-del btn btn-danger" type="button" data-path="{{ path('event_crud', {'id': event.id}) }}">-</button>
+                                     </div>
+                                 </div>
+                             </div>
+                         {% endif %}
+                     {% endfor %}
+             </div>
+                <div class="text-center col-md-12">
+                    <h2 class="">Voici les évènements auquels vous participez</h2>
+                </div>
+            {% endif %}
+        </div>
+    {% endblock %}
+    <script type="application/javascript" src="{{ asset('front/js/meetApp.js') }}"></script>
+    <script>
+        $(function () {
+            console.log('hahaha');
+            meetApp.manageEvent.init();
+            console.log(meetApp);
+        })
+    </script>
 {% endblock %}
+

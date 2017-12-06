@@ -5,7 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Commentary;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Commentary controller.
@@ -88,7 +89,7 @@ class CommentaryController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('commentary_edit', array('id' => $commentary->getId()));
+            return $this->redirectToRoute('admin_commentary_index', array('id' => $commentary->getId()));
         }
 
         return $this->render('admin/commentary/edit.html.twig', array(
@@ -115,7 +116,7 @@ class CommentaryController extends Controller
             $em->flush($commentary);
         }
 
-        return $this->redirectToRoute('commentary_index');
+        return $this->redirectToRoute('admin_commentary_index');
     }
 
     /**

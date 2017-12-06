@@ -2,11 +2,12 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Category;
 use Symfony\Component\Form\AbstractType;
-//use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
 
 class EventType extends AbstractType
 {
@@ -15,13 +16,19 @@ class EventType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
             ->add('name')
             ->add('place')
-//            ->add('date', DateTimeType::class )
-            ->add('category');
+            ->add('category')
+            ->add('capacity', TextType::class)
+            ->add('date', DateTimeType::class, array(
+                'label' => 'date Evenenement',
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
+            ));
     }
-    
+
     /**
      * {@inheritdoc}
      */

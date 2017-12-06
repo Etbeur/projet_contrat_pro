@@ -1,10 +1,9 @@
 {% extends 'layout-admin.html.twig' %}
 
 {% block content %}
-
     <div class="page-title">
         <div class="title_left">
-            <h3>User <small>{{ user.Firstname }}</small></h3>
+            <h3>Event <small>{{ event.name }}</small></h3>
         </div>
     </div>
 
@@ -18,43 +17,32 @@
                         <tbody>
                             <tr>
                                 <th>Id</th>
-                                <td>{{ user.id }}</td>
+                                <td>{{ event.id }}</td>
                             </tr>
                             <tr>
-                                <th>First</th>
-                                <td>{{ user.firstName }}</td>
+                                <th>Name</th>
+                                <td>{{ event.name }}</td>
                             </tr>
                             <tr>
-                                <th>Last</th>
-                                <td>{{ user.lastName }}</td>
+                                <th>Place</th>
+                                <td>{{ event.place }}</td>
                             </tr>
                             <tr>
-                                <th>Age</th>
-                                <td>{{ user.age }}</td>
-                            </tr>
-                            <tr>
-                                <th>Image</th>
-                                <td>{{ user.image }}</td>
-                            </tr>
-                            <tr>
-                                <th>User</th>
-                                {% if user.enabled == 1 %}
-                                    <td>Actif</td>
-                                {% else %}
-                                    <td>Inactif</td>
-                                {% endif %}
+                                <th>Category</th>
+                                <td>{{ event.category }}</td>
                             </tr>
                         </tbody>
                     </table>
                     <div class="ln_solid"></div>
                     <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <a href="{{ path('admin_user_index') }}" class="btn btn-primary">Retour à la liste</a>
-                            <a href="{{ path('user_edit', { 'id': user.id }) }}" class="btn btn-primary">Modifier</a>
+                            <a href="{{ path('admin_event_index') }}" class="btn btn-primary">Retour à la liste</a>
+                            <a href="{{ path('event_edit', { 'id': event.id }) }}" class="btn btn-primary">Modifier</a>
                         </div>
                     </div>
                 </div>
             </div>
+
             {{ form_start(delete_form) }}
             <input type="submit" value="Supprimer" class="btn btn-danger pull-right">
             {{ form_end(delete_form) }}

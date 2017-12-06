@@ -49,7 +49,7 @@ class AdressController extends Controller
             $em->persist($adress);
             $em->flush($adress);
 
-            return $this->redirectToRoute('adress_show', array('id' => $adress->getId()));
+            return $this->redirectToRoute('admin_adress_index', array('id' => $adress->getId()));
         }
 
         return $this->render('admin/adress/new.html.twig', array(
@@ -116,7 +116,7 @@ class AdressController extends Controller
             $em->flush($adress);
         }
 
-        return $this->redirectToRoute('adress_index');
+        return $this->redirectToRoute('admin_adress_index');
     }
 
     /**

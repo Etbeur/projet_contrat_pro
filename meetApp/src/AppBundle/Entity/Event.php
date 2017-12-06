@@ -2,7 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * Event
@@ -49,22 +51,32 @@ class Event
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->users = new ArrayCollection();
     }
+
+    /**
+     * @var string
+     * @ORM\Column(name="capacity", type="string", length=10)
+     */
+    private $capacity;
 
     /**
      * @var string
      * Many Event have One category
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="event")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
      */
     private $category;
 
     /**
-     * Many Event have One User
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="event")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * Many Event have Many User
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", mappedBy="events")
+     *
+     * Many events has one user
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="events")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $user;
+    private $users;
 
     /**
      * One Event has One Adress
@@ -188,22 +200,6 @@ class Event
     /**
      * @return mixed
      */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param mixed $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getAdress()
     {
         return $this->adress;
@@ -231,5 +227,60 @@ class Event
     public function setCommentary($commentary)
     {
         $this->commentary = $commentary;
+    }
+
+    /**
+     * Get users
+     * @return ArrayCollection();
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * Add users
+     *
+     * @param User $users
+     *
+     * @return Event
+     */
+    public function addUser(User $users)
+    {
+        $this->users[] = $users;
+        return $this;
+    }
+
+    /**
+     * Remove users
+     * @param User $users
+     */
+    public function removeUsers(User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * @param mixed $users
+     */
+    public function setUsers($users)
+    {
+        $this->users = $users;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCapacity()
+    {
+        return $this->capacity;
+    }
+
+    /**
+     * @param mixed $capacity
+     */
+    public function setCapacity($capacity)
+    {
+        $this->capacity = $capacity;
     }
 }

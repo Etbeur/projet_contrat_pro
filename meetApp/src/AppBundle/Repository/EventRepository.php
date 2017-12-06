@@ -2,6 +2,10 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Event;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping;
+
 /**
  * EventRepository
  *

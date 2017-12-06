@@ -9,7 +9,7 @@
                 <a class="btn btn-light" href="{{ path('homePage') }}">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="btn btn-light" href="{{ path("event_index") }}">Event <span class="sr-only">(current)</span></a>
+                <a class="btn btn-light" href="{{ path("user_event_index") }}">Event <span class="sr-only">(current)</span></a>
             </li>
 
             {% if is_granted("IS_AUTHENTICATED_FULLY") %}
@@ -19,6 +19,9 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <p class="dropdown-header">{{ app.user.username }}</p>
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <a class="dropdown-item" href="{{ path('dashboard') }}">Dashboard</a>
+                        {% endif %}
                         <a class="dropdown-item" href="/logout">Log Out</a>
                     </div>
                 </div>

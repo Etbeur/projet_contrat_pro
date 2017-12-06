@@ -5,7 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Event controller.
@@ -115,7 +116,7 @@ class EventController extends Controller
             $em->flush($event);
         }
 
-        return $this->redirectToRoute('event_index');
+        return $this->redirectToRoute('admin_event_index');
     }
 
     /**
