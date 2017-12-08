@@ -31,9 +31,9 @@ class EventController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $events = $em->getRepository('AppBundle:Event')->findAll();
+            $events = $em->getRepository('AppBundle:Event')->eventDateAscendingOrder();
 
-        return $this->render('user/event/index_event.html.twig',array(
+        return $this->render('user/event/index_event.html.twig', array(
             "events" => $events,
         ));
     }
@@ -51,40 +51,98 @@ class EventController extends Controller
     {
         $event = new Event();
         $event->setUsers($this->container->get('security.token_storage')->getToken()->getUser());
-        $form = $this->createForm('AppBundle\Form\EventType',$event);
+        $form = $this->createForm('AppBundle\Form\EventType', $event);
         $form->handleRequest($request);
 
-        if ( $form->isSubmitted() && $form->isValid() )
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($event);
             $em->flush($event);
 
-            return $this->redirectToRoute('user_event_index',array( 'id' => $event->getId() ));
+            return $this->redirectToRoute('user_event_index', array( 'id' => $event->getId() ));
         }
 
-        return $this->render('user/event/new.html.twig',array(
+        return $this->render('user/event/new.html.twig', array(
             'events' => $event,
             'form' => $form->createView(),
         ));
     }
 
     /**
+     * Finds and displays a event entity.
+     *
+     * @Route("/{id}", name="user_event_show", requirements={"id": "\d+"})
+     * @Method("GET")
+     */
+    public function showAction(Event $event)
+    {
+        $deleteForm = $this->createDeleteForm($event);
+
+        return $this->render('user/event/show.html.twig', array(
+            'event' => $event,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Displays a form to edit an existing event entity.
+     *
+     * @Route("/{id}/edit", name="user_event_edit", requirements={"id": "\d+"})
+     * @Method({"GET", "POST"})
+     */
+    public function editAction(Request $request, Event $event)
+    {
+        $deleteForm = $this->createDeleteForm($event);
+        $editForm = $this->createForm('AppBundle\Form\EventType', $event);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('homePage', array('id' => $event->getId()));
+        }
+
+        return $this->render('user/event/edit.html.twig', array(
+            'event' => $event,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
      * Add choosen event in user event.
      *
-     * @Route("/{id}/add", name="user_event_add", requirements={"id": "/d+"})
+     * @Route("/{id}/add", name="user_event_add", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
      * @param Request $request
      *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function addUserEvent(Request $request, Event $event)
     {
+        $event = new Event();
+        $event->setUsers($this->container->get('security.token_storage')->getToken()->getUser());
+        $form = $this->createForm('AppBundle\Form\EventType', $event);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($event);
+            $em->flush($event);
+
+            return $this->redirectToRoute('user_event_index', array( 'id' => $event->getId() ));
+        }
+
+        return $this->render('user/event/new.html.twig', array(
+            'events' => $event,
+            'form' => $form->createView(),
+        ));
     }
 
     /**
      * Deletes a event entity.
      *
-     * @Route("/{id}", name="user_event_delete")
+     * @Route("/{id}", name="user_event_delete", requirements={"id" :"\d+"})
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Event $event)

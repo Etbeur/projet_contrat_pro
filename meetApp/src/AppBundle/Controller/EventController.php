@@ -61,7 +61,7 @@ class EventController extends Controller
     /**
      * Finds and displays a event entity.
      *
-     * @Route("/{id}", name="event_show")
+     * @Route("/{id}", name="event_show", requirements={"id": "\d+"})
      * @Method("GET")
      */
     public function showAction(Event $event)
@@ -77,7 +77,7 @@ class EventController extends Controller
     /**
      * Displays a form to edit an existing event entity.
      *
-     * @Route("/{id}/edit", name="event_edit")
+     * @Route("/{id}/edit", name="event_edit", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Event $event)
@@ -102,7 +102,7 @@ class EventController extends Controller
     /**
      * Deletes a event entity.
      *
-     * @Route("/{id}", name="event_delete")
+     * @Route("/{id}", name="event_delete", requirements={"id": "\d+"})
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Event $event)

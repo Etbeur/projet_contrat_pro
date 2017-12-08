@@ -61,7 +61,7 @@ class AdressController extends Controller
     /**
      * Finds and displays a adress entity.
      *
-     * @Route("/{id}", name="adress_show")
+     * @Route("/{id}", name="adress_show", requirements={"id": "\d+"})
      * @Method("GET")
      */
     public function showAction(Adress $adress)
@@ -77,7 +77,7 @@ class AdressController extends Controller
     /**
      * Displays a form to edit an existing adress entity.
      *
-     * @Route("/{id}/edit", name="adress_edit")
+     * @Route("/{id}/edit", name="adress_edit", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Adress $adress)
@@ -102,7 +102,7 @@ class AdressController extends Controller
     /**
      * Deletes a adress entity.
      *
-     * @Route("/{id}", name="adress_delete")
+     * @Route("/{id}", name="adress_delete", requirements={"id": "\d+"})
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Adress $adress)

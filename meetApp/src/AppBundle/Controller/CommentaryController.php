@@ -61,7 +61,7 @@ class CommentaryController extends Controller
     /**
      * Finds and displays a commentary entity.
      *
-     * @Route("/{id}", name="commentary_show")
+     * @Route("/{id}", name="commentary_show", requirements={"id": "\d+"})
      * @Method("GET")
      */
     public function showAction(Commentary $commentary)
@@ -77,7 +77,7 @@ class CommentaryController extends Controller
     /**
      * Displays a form to edit an existing commentary entity.
      *
-     * @Route("/{id}/edit", name="commentary_edit")
+     * @Route("/{id}/edit", name="commentary_edit", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Commentary $commentary)
@@ -102,7 +102,7 @@ class CommentaryController extends Controller
     /**
      * Deletes a commentary entity.
      *
-     * @Route("/{id}", name="commentary_delete")
+     * @Route("/{id}", name="commentary_delete", requirements={"id": "\d+"})
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Commentary $commentary)

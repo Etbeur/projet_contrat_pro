@@ -14,4 +14,14 @@ use Doctrine\ORM\Mapping;
  */
 class EventRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function eventDateAscendingOrder()
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb->select('d')
+            ->from('AppBundle:Event', 'd')
+            ->orderBy('d.date', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
 }

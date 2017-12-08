@@ -1,29 +1,9 @@
-{% extends 'layout-admin.html.twig' %}
-
-{#{% block body %}#}
-    {#<h1>Event edit</h1>#}
-
-    {#{{ form_start(edit_form) }}#}
-        {#{{ form_widget(edit_form) }}#}
-        {#<input type="submit" value="Edit" />#}
-    {#{{ form_end(edit_form) }}#}
-
-    {#<ul>#}
-        {#<li>#}
-            {#<a href="{{ path('admin_event_index') }}">Back to the list</a>#}
-        {#</li>#}
-        {#<li>#}
-            {#{{ form_start(delete_form) }}#}
-                {#<input type="submit" value="Delete">#}
-            {#{{ form_end(delete_form) }}#}
-        {#</li>#}
-    {#</ul>#}
-{#{% endblock %}#}
+{% extends 'homePage.html.twig' %}
 
 {% block content %}
 
     <div class="page-title">
-        <div class="title_left">
+        <div class="text-center">
             <h3>Event <small>Modification</small></h3>
         </div>
     </div>
@@ -58,12 +38,26 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        {{ form_label(edit_form.capacity, null, {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_widget(edit_form.capacity, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'placeholder': 'example: sport'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(edit_form.date, null, {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_widget(edit_form.date, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'placeholder': 'example: sport'}}) }}
+                        </div>
+                    </div>
+
                     {{ form_widget(edit_form) }}
 
                     <div class="ln_solid"></div>
                     <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <a href="{{ path('admin_event_index') }}" class="btn btn-primary pull-left" >Retour à la liste</a>
+                            <a href="{{ path('homePage') }}" class="btn btn-primary pull-left" >Retour à la liste</a>
                             <input type="submit" value="Modifier" class="btn btn-success" />
                         </div>
                     </div>
@@ -71,13 +65,6 @@
                     {{ form_end(edit_form) }}
                 </div>
             </div>
-
-
-            {{ form_start(delete_form) }}
-            <a href="{{ path('admin_user_index') }}">
-                <input class="btn btn-danger pull-right" type="submit" value="Supprimer">
-            </a>
-            {{ form_end(delete_form) }}
         </div>
     </div>
 {% endblock %}

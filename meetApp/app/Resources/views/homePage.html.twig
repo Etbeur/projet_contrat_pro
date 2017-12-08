@@ -12,7 +12,8 @@
 
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') and not is_granted('ROLE_ADMIN') %}
-             <div class="row event-card">
+
+                 <div class="row event-card">
                      <h2 class="text-center col-md-12">Voici vos évènement créés</h2>
                      {% for event in events %}
                          {% if event.users == app.user %}
@@ -22,28 +23,23 @@
                                          <p><strong>Event:</strong> {{ event.name }}</p>
                                          <p><strong>Place:</strong> {{ event.place }}</p>
                                          <p><strong>Category:</strong> {{ event.category }}</p>
+                                         <p><strong>Capacity:</strong> {{ event.capacity }}</p>
                                          <p><strong>Organiser:</strong> {{ event.users }}</p>
                                          <p><strong>Date:</strong> {{ event.date|date('d/m/Y H:i:s') }}</p>
-                                         <button class="event-del btn btn-danger" type="button" data-path="{{ path('event_crud', {'id': event.id}) }}">-</button>
+                                         {#<p >{{ event.id }}</p>#}
+                                         <a href="{{ path('user_event_show', { 'id': event.id }) }}" class="glyphicon glyphicon-minus btn btn-danger"></a>
+                                         <a href="{{ path('user_event_edit', { 'id': event.id }) }}" class="glyphicon glyphicon-pencil btn btn-info"></a>
                                      </div>
                                  </div>
                              </div>
                          {% endif %}
                      {% endfor %}
-             </div>
+                 </div>
                 <div class="text-center col-md-12">
                     <h2 class="">Voici les évènements auquels vous participez</h2>
                 </div>
             {% endif %}
         </div>
     {% endblock %}
-    <script type="application/javascript" src="{{ asset('front/js/meetApp.js') }}"></script>
-    <script>
-        $(function () {
-            console.log('hahaha');
-            meetApp.manageEvent.init();
-            console.log(meetApp);
-        })
-    </script>
 {% endblock %}
 

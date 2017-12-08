@@ -60,7 +60,7 @@ class MessageController extends Controller
     /**
      * Finds and displays a message entity.
      *
-     * @Route("/{id}", name="message_show")
+     * @Route("/{id}", name="message_show", requirements={"id": "\d+"})
      * @Method("GET")
      */
     public function showAction(Message $message)
@@ -76,7 +76,7 @@ class MessageController extends Controller
     /**
      * Displays a form to edit an existing message entity.
      *
-     * @Route("/{id}/edit", name="message_edit")
+     * @Route("/{id}/edit", name="message_edit", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Message $message)
@@ -101,7 +101,7 @@ class MessageController extends Controller
     /**
      * Deletes a message entity.
      *
-     * @Route("/{id}", name="message_delete")
+     * @Route("/{id}", name="message_delete", requirements={"id": "\d+"})
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Message $message)

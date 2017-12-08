@@ -60,7 +60,7 @@ class CategoryController extends Controller
     /**
      * Finds and displays a category entity.
      *
-     * @Route("/{id}", name="category_show")
+     * @Route("/{id}", name="category_show", requirements={"id": "\d+"})
      * @Method("GET")
      */
     public function showAction(Category $category)
@@ -76,7 +76,7 @@ class CategoryController extends Controller
     /**
      * Displays a form to edit an existing category entity.
      *
-     * @Route("/{id}/edit", name="category_edit")
+     * @Route("/{id}/edit", name="category_edit", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Category $category)
@@ -101,7 +101,7 @@ class CategoryController extends Controller
     /**
      * Deletes a category entity.
      *
-     * @Route("/{id}", name="category_delete")
+     * @Route("/{id}", name="category_delete", requirements={"id": "\d+"})
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Category $category)

@@ -80,7 +80,7 @@ class UserController extends Controller
     /**
      * Finds and displays a user entity.
      *
-     * @Route("/{id}", name="user_show")
+     * @Route("/{id}", name="user_show", requirements={"id": "\d+"})
      * @Method("GET")
      */
     public function showAction(User $user)
@@ -96,7 +96,7 @@ class UserController extends Controller
     /**
      * Displays a form to edit an existing user entity.
      *
-     * @Route("/{id}/edit", name="user_edit")
+     * @Route("/{id}/edit", name="user_edit", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, User $user)
@@ -121,7 +121,7 @@ class UserController extends Controller
     /**
      * Deletes a user entity.
      *
-     * @Route("/{id}", name="user_delete")
+     * @Route("/{id}", name="user_delete", requirements={"id": "\d+"})
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, User $user)
