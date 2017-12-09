@@ -20,6 +20,8 @@
                             <th>Name</th>
                             <th>Place</th>
                             <th>Category</th>
+                            <th>Creator</th>
+                            <th>Total capacity</th>
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
@@ -31,6 +33,8 @@
                                 <td>{{ event.name }}</td>
                                 <td>{{ event.place }}</td>
                                 <td>{{ event.category }}</td>
+                                <td>{{ event.creators }}</td>
+                                <td>{{ event.totalCapacity }}</td>
                                 <td>{{ event.date|date('d-M-y H:i:s') }}</td>
                                 <td>
                                     <div class="btn-group">

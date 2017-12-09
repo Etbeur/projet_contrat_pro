@@ -1,0 +1,17 @@
+{% extends 'homePage.html.twig' %}
+
+{% block content %}
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') and not is_granted('ROLE_ADMIN') %}
+        <div class="text-center">
+            {{ test }}
+            <p><strong>Voulez-vous participer à cette événement?</strong></p>
+            {{ form_start() }}
+            <a href="{{ path('homePage') }}" class="btn btn-primary">Retour à la liste</a>
+            <input type="submit" value="Participer" class="btn btn-success">
+            {{ form_end(delete_form) }}
+        </div>
+    {% endif %}
+
+
+{% endblock %}

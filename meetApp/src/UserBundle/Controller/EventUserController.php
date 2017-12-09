@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("/event")
  */
-class EventController extends Controller
+class EventUserController extends Controller
 {
     /**
      * List all Event
@@ -50,7 +50,7 @@ class EventController extends Controller
     public function newAction(Request $request)
     {
         $event = new Event();
-        $event->setUsers($this->container->get('security.token_storage')->getToken()->getUser());
+        $event->setCreator($this->container->get('security.token_storage')->getToken()->getUser());
         $form = $this->createForm('AppBundle\Form\EventType', $event);
         $form->handleRequest($request);
 
@@ -78,7 +78,7 @@ class EventController extends Controller
     {
         $deleteForm = $this->createDeleteForm($event);
 
-        return $this->render('user/event/show.html.twig', array(
+        return $this->render('user/event/show_delete_event.html.twig', array(
             'event' => $event,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -118,22 +118,21 @@ class EventController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function addUserEvent(Request $request, Event $event)
+    public function addUserEvent(Request $request)
     {
         $event = new Event();
-        $event->setUsers($this->container->get('security.token_storage')->getToken()->getUser());
-        $form = $this->createForm('AppBundle\Form\EventType', $event);
-        $form->handleRequest($request);
+        $event->setBooking(true);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($event->getBooking() == true) {
+            $event->setParticipants(count(+1));
             $em = $this->getDoctrine()->getManager();
             $em->persist($event);
             $em->flush($event);
 
-            return $this->redirectToRoute('user_event_index', array( 'id' => $event->getId() ));
+            return $this->redirectToRoute('homePage', array( 'id' => $event->getId() ));
         }
 
-        return $this->render('user/event/new.html.twig', array(
+        return $this->render('user/event/index_event.html.twig', array(
             'events' => $event,
             'form' => $form->createView(),
         ));

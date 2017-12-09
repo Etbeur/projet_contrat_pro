@@ -55,12 +55,11 @@ class User extends BaseUser
     private $image;
 
     /**
-     * Many Users has Many Events
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Event", inversedBy="users")
-     * @ORM\JoinTable(name="booking")
-     *
      * One user has zero or many events
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Event", mappedBy="users")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Event", mappedBy="creators")
+     *
+     * Many Users have Many Events
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Event", mappedBy="participants")
      */
     private $events;
 

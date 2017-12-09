@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    {% if is_granted('IS_AUTHENTICATED_FULLY') and not is_granted('ROLE_ADMIN') and event.users == app.user %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') and not is_granted('ROLE_ADMIN') and event.creators == app.user %}
         <div class="text-center">
             <p><strong>Voulez-vous vraiment supprimer cet événement? Attention cette action est définitive</strong></p>
             {{ form_start(delete_form) }}

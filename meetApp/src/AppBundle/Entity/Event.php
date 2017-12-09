@@ -45,20 +45,26 @@ class Event
     private $date;
 
     /**
-     * constructor for date
+     * constructor for date and creators
      *
      */
     public function __construct()
     {
         $this->date = new \DateTime();
-        $this->users = new ArrayCollection();
+        $this->creators = new ArrayCollection();
     }
 
     /**
      * @var string
-     * @ORM\Column(name="capacity", type="string", length=10)
+     * @ORM\Column(name="totalCapacity", type="string", length=10)
      */
-    private $capacity;
+    private $totalCapacity;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="reserved", type="integer", length=2)
+     */
+    private $reserved;
 
     /**
      * @var string
@@ -69,14 +75,25 @@ class Event
     private $category;
 
     /**
-     * Many Event have Many User
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", mappedBy="events")
      *
-     * Many events has one user
+     * Many events has one creator
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="events")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="creator_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $users;
+    private $creators;
+
+    /**
+     * Many Event have Many User
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", inversedBy="events")
+     * @ORM\JoinTable(name="participation")
+     */
+    private $participants;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="booking", type="boolean", options={"default":false})
+     */
+    private $booking;
 
     /**
      * One Event has One Adress
@@ -230,57 +247,105 @@ class Event
     }
 
     /**
-     * Get users
+     * Get creators
      * @return ArrayCollection();
      */
-    public function getUsers()
+    public function getCreators()
     {
-        return $this->users;
+        return $this->creators;
     }
 
     /**
-     * Add users
+     * Add creators
      *
-     * @param User $users
+     * @param User $creators
      *
      * @return Event
      */
-    public function addUser(User $users)
+    public function addCreators(User $creators)
     {
-        $this->users[] = $users;
+        $this->creators[] = $creators;
         return $this;
     }
 
     /**
-     * Remove users
-     * @param User $users
+     * Remove creators
+     * @param User $creators
      */
-    public function removeUsers(User $users)
+    public function removeCreators(User $creators)
     {
-        $this->users->removeElement($users);
+        $this->creators->removeElement($creators);
     }
 
     /**
-     * @param mixed $users
+     * @param mixed $creators
      */
-    public function setUsers($users)
+    public function setCreator($creators)
     {
-        $this->users = $users;
+        $this->creators = $creators;
     }
 
     /**
      * @return mixed
      */
-    public function getCapacity()
+    public function gettotalCapacity()
     {
-        return $this->capacity;
+        return $this->totalCapacity;
     }
 
     /**
-     * @param mixed $capacity
+     * @param mixed $totalCapacity
      */
-    public function setCapacity($capacity)
+    public function settotalCapacity($totalCapacity)
     {
-        $this->capacity = $capacity;
+        $this->totalCapacity = $totalCapacity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBooking()
+    {
+        return $this->booking;
+    }
+
+    /**
+     * @param mixed $booking
+     */
+    public function setBooking($booking)
+    {
+        $this->booking = $booking;
+    }
+
+    /**
+     * @return int
+     */
+    public function getReserved() : int
+    {
+        return $this->reserved;
+    }
+
+    /**
+     * @param int $reserved
+     */
+    public function setReserved(int $reserved)
+    {
+        $this->reserved = $reserved;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParticipants()
+    {
+        return $this->participants;
+    }
+
+    /**
+     * @param mixed $participants
+     */
+    public function setParticipants($participants)
+    {
+        $this->participants = $participants;
     }
 }

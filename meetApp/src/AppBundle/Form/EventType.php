@@ -21,7 +21,7 @@ class EventType extends AbstractType
             ->add('name')
             ->add('place')
             ->add('category')
-            ->add('capacity', TextType::class)
+            ->add('totalCapacity', TextType::class)
             ->add('date', DateTimeType::class, array(
                 'label' => 'date Evenenement',
                 'date_widget' => 'single_text',

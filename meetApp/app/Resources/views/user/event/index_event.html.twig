@@ -11,16 +11,16 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-block text-center">
-                            <p><strong>Event:</strong> {{ event.name }}</p>
-                            <p><strong>Place:</strong> {{ event.place }}</p>
-                            <p><strong>Category:</strong> {{ event.category }}</p>
-                            <p><strong>Capacity:</strong> {{ event.capacity }}</p>
-                            <p><strong>Organiser:</strong> {{ event.users }}</p>
-                            <p><strong>Date:</strong> {{ event.date|date('d/m/Y H:i:s') }}</p>
-                            <input type="hidden" value="{{ event.id }}">
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <p><strong>Event:</strong> {{ event.name }}</p>
+                        <p><strong>Place:</strong> {{ event.place }}</p>
+                        <p><strong>Category:</strong> {{ event.category }}</p>
+                        <p><strong>Total capacity:</strong> {{ event.totalCapacity }}</p>
+                        <p><strong>Organiser:</strong> {{ event.creators }}</p>
+                        <p><strong>Date:</strong> {{ event.date|date('d/m/Y H:i:s') }}</p>
+                        <input type="hidden" value="{{ event.id }}">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY')  and event.creators != app.user %}
                                 {% if not is_granted('ROLE_ADMIN') %}
-                                    <input type="submit" value="+" class="glyphicon-plus-sign btn btn-success" />
+                                    <a href="{{ path('user_event_add', { 'id': event.id }) }}" class="glyphicon glyphicon-plus btn btn-success"></a>
                                 {% endif %}
                             {% endif %}
                     </div>

@@ -16,15 +16,15 @@
                  <div class="row event-card">
                      <h2 class="text-center col-md-12">Voici vos évènement créés</h2>
                      {% for event in events %}
-                         {% if event.users == app.user %}
+                         {% if event.creators == app.user %}
                              <div class="col-md-4">
                                  <div class="card">
                                      <div class="card-block">
                                          <p><strong>Event:</strong> {{ event.name }}</p>
                                          <p><strong>Place:</strong> {{ event.place }}</p>
                                          <p><strong>Category:</strong> {{ event.category }}</p>
-                                         <p><strong>Capacity:</strong> {{ event.capacity }}</p>
-                                         <p><strong>Organiser:</strong> {{ event.users }}</p>
+                                         <p><strong>Total Capacity:</strong> {{ event.totalCapacity }}</p>
+                                         <p><strong>Organiser:</strong> {{ event.creators }}</p>
                                          <p><strong>Date:</strong> {{ event.date|date('d/m/Y H:i:s') }}</p>
                                          {#<p >{{ event.id }}</p>#}
                                          <a href="{{ path('user_event_show', { 'id': event.id }) }}" class="glyphicon glyphicon-minus btn btn-danger"></a>
