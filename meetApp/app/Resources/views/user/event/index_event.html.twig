@@ -2,10 +2,11 @@
 
 {% block content %}
     <div class="text-center" id="create_event">
-        {% if is_granted("IS_AUTHENTICATED_FULLY") and not is_granted("ROLE_ADMIN") %}
+        {% if not is_granted("ROLE_ADMIN") %}
             <a class="btn btn-success" href="{{ path('user_event_new') }}">Create new event</a>
         {% endif %}
     </div>
+
     <div class="row event-card">
         {% for event in events %}
             <div class="col-md-4">
@@ -15,18 +16,21 @@
                         <p><strong>Place:</strong> {{ event.place }}</p>
                         <p><strong>Category:</strong> {{ event.category }}</p>
                         <p><strong>Total capacity:</strong> {{ event.totalCapacity }}</p>
+                        <p><strong>Remaining places:</strong> {{ event.totalCapacity - event.participants|length}} </p>
                         <p><strong>Organiser:</strong> {{ event.creators }}</p>
                         <p><strong>Date:</strong> {{ event.date|date('d/m/Y H:i:s') }}</p>
                         <input type="hidden" value="{{ event.id }}">
-                        {% if is_granted('IS_AUTHENTICATED_FULLY')  and event.creators != app.user %}
-                                {% if not is_granted('ROLE_ADMIN') %}
-                                    <a href="{{ path('user_event_add', { 'id': event.id }) }}" class="glyphicon glyphicon-plus btn btn-success"></a>
-                                {% endif %}
-                            {% endif %}
+                        {% if event.creators != app.user and not is_granted('ROLE_ADMIN') and (event.totalCapacity - event.participants|length) > 0 %}
+                            <a href="{{ path('user_event_add', { 'id': event.id }) }}" class="glyphicon glyphicon-plus btn btn-success"></a>
+                        {% elseif (event.totalCapacity - event.participants|length) == 0 %}
+                            <a href="{{ path('user_event_add', { 'id': event.id }) }}" class="glyphicon glyphicon-plus btn btn-danger full"></a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
+
+    <script src="{{ asset('front/js/meetApp.js') }}"></script>
 {% endblock %}
 

@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+{% block body %}
+    <div class="page-title">
+        <div class="text-center">
+            <h3>Modify Account</h3>
+        </div>
+    </div>
+    <div class="container text-center">
+        <div class="row justify-content-center">
+            {{ form_start(edit_form, {attr: {'class': 'col-md-6 well form-horizontal form-label-left', 'novalidate': 'novalidate'}}) }}
+
+            <div class="form-group">
+                {{ form_label(edit_form.email, null, {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    {{ form_widget(edit_form.email, {'attr': {'class': 'form-control col-md-12 col-xs-12', 'placeholder': 'Email'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(edit_form.username, null, {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    {{ form_widget(edit_form.username, {'attr': {'class': 'form-control col-md-12 col-xs-12', 'placeholder': 'Username'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(edit_form.plainPassword.first, null, {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    {{ form_widget(edit_form.plainPassword.first, {'attr': {'class': 'form-control col-md-12 col-xs-12', 'placeholder': 'Password'}}) }}
+                    {{ form_errors(edit_form.plainPassword.first) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(edit_form.plainPassword.second, null, {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    {{ form_widget(edit_form.plainPassword.second, {'attr': {'class': 'form-control col-md-12 col-xs-12', 'placeholder': 'Password Confirmation'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(edit_form.firstName, null, {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    {{ form_widget(edit_form.firstName, {'attr': {'class': 'form-control col-md-12 col-xs-12', 'placeholder': 'firstName'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(edit_form.lastName, null, {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    {{ form_widget(edit_form.lastName, {'attr': {'class': 'form-control col-md-12 col-xs-12', 'placeholder': 'lastName'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(edit_form.age, null, {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    {{ form_widget(edit_form.age, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            {{ form_widget(edit_form) }}
+
+            <div class="ln_solid"></div>
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                    <input type="submit" value="Modifier" class="btn btn-success" />
+                    <a href="{{ path('homePage') }}" class="btn btn-primary pull-left" >Retour à la liste</a>
+                </div>
+            </div>
+
+            {{ form_end(edit_form) }}
+            <div class="container">
+                {{ form_start(delete_form) }}
+                <a href="{{ path('admin_user_index') }}">
+                    <input class="btn btn-danger" type="submit" value="Supprimer mon compte">
+                </a>
+                {{ form_end(delete_form) }}
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+{% endblock body %}

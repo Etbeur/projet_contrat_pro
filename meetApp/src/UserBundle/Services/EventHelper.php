@@ -10,11 +10,5 @@ namespace UserBundle\Services;
 
 class EventHelper
 {
-    public function add($eventid){
-       return ['aucun element'];
-    }
 
-    public function delete($eventid){
-        return ['aucun element'];
-    }
 }

@@ -21,17 +21,10 @@ class HomePageController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-//        if ($this->container->get('security.authorization_checker')->isGranted("IS_AUTHENTICATED_FULLY")) {
-//            $users = $this->container->get('security.token_storage')->getToken()->getUser();
-//            $this->id = $users->getId();
-//        }
-        $events = $em->getRepository('AppBundle:Event')->findAll();
-        $books = $em->getRepository('AppBundle:User')->findAll();
+        $events = $em->getRepository('AppBundle:Event')->eventDateAscendingOrder();
 
         return $this->render('homePage.html.twig', [
             'events' => $events,
-            'books' => $books
-//            'users' => $this->id
         ]);
     }
 }

@@ -45,15 +45,13 @@
 
                     {#{{ form_widget(edit_form) }}#}
 
-                    <p><strong>Voulez-vous participer à cette événement {{ events.name }}?</strong></p>
-                    <a href="{{ path('user_event_index') }}" class="btn btn-primary pull-left" >Retour à la liste</a>
-                    <input type="submit" value="Participer" class="btn btn-success" />
+                    <p><strong>Souhaitez-vous ne plus participer à cet événement? Vous pourrez vous y inscrire de nouveau s'il reste de la place.</strong></p>
+                    <a href="{{ path('homePage') }}" class="btn btn-primary">Retour à la liste</a>
+                    <input type="submit" value="Supprimer" class="btn btn-danger">
 
                     {{ form_end(edit_form) }}
                 </div>
             </div>
         </div>
     {% endif %}
-
-
 {% endblock %}

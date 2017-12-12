@@ -1,0 +1,1 @@
+$('.full').addClass('disabled');

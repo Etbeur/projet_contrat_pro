@@ -2,17 +2,13 @@
 
 {% block body %}
 
-    {% include 'front-topbar.html.twig' %}
-
     {% block content %}
 
         <div class="col-md-12 text-center">
             <p>Bienvenue sur ce site d'évènements de rencontres <strong>{{ app.user }}</strong>. Ce site vous permet d'organiser ou de participer à des évènements afin de rencontrer d'autre personnes.</p>
             <p>Rendez-vous dans l'onglet évènement pour voir les différents évènements disponible.</p>
 
-
-        {% if is_granted('IS_AUTHENTICATED_FULLY') and not is_granted('ROLE_ADMIN') %}
-
+        {% if not is_granted('ROLE_ADMIN') %}
                  <div class="row event-card">
                      <h2 class="text-center col-md-12">Voici vos évènement créés</h2>
                      {% for event in events %}
@@ -24,10 +20,10 @@
                                          <p><strong>Place:</strong> {{ event.place }}</p>
                                          <p><strong>Category:</strong> {{ event.category }}</p>
                                          <p><strong>Total Capacity:</strong> {{ event.totalCapacity }}</p>
-                                         <p><strong>Organiser:</strong> {{ event.creators }}</p>
+                                         <p><strong>Inscription:</strong> {{ event.participants|length}}</p>
                                          <p><strong>Date:</strong> {{ event.date|date('d/m/Y H:i:s') }}</p>
                                          {#<p >{{ event.id }}</p>#}
-                                         <a href="{{ path('user_event_show', { 'id': event.id }) }}" class="glyphicon glyphicon-minus btn btn-danger"></a>
+                                         <a href="{{ path('user_event_show_delete', { 'id': event.id }) }}" class="glyphicon glyphicon-minus btn btn-danger"></a>
                                          <a href="{{ path('user_event_edit', { 'id': event.id }) }}" class="glyphicon glyphicon-pencil btn btn-info"></a>
                                      </div>
                                  </div>
@@ -35,11 +31,32 @@
                          {% endif %}
                      {% endfor %}
                  </div>
-                <div class="text-center col-md-12">
-                    <h2 class="">Voici les évènements auquels vous participez</h2>
+
+                <div class="row event-card">
+                    <h2 class="text-center col-md-12">Voici les évènements auquels vous participez</h2>
+                    {% for event in events %}
+                        {% for participant in event.participants %}
+                            {% if participant == app.user %}
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <p><strong>Event:</strong> {{ event.name }}</p>
+                                            <p><strong>Place:</strong> {{ event.place }}</p>
+                                            <p><strong>Category:</strong> {{ event.category }}</p>
+                                            <p><strong>Total Capacity:</strong> {{ event.totalCapacity }}</p>
+                                            <p><strong>Inscription:</strong> {{ event.participants|length}}</p>
+                                            <p><strong>Date:</strong> {{ event.date|date('d/m/Y H:i:s') }}</p>
+                                            <a href="{{ path('user_event_remove', { 'id': event.id }) }}" class="glyphicon glyphicon-minus btn btn-danger"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
                 </div>
-            {% endif %}
+        {% endif %}
         </div>
     {% endblock %}
+
 {% endblock %}
 

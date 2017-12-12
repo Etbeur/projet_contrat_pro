@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="home.message">
+                <source>home.message</source>
+                <target>
+                    Bienvenue sur ce site d'évènements de rencontres. Ce site vous permet d'organiser ou de participer à des évènements afin de rencontrer d'autre personnes.
+                    Rendez-vous dans l'onglet évènement pour voir les différents évènements disponible.
+                </target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

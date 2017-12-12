@@ -52,7 +52,6 @@ class Event
     {
         $this->date = new \DateTime();
         $this->creators = new ArrayCollection();
-        $this->participants = new ArrayCollection();
     }
 
     /**
