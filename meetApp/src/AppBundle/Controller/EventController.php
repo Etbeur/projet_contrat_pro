@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Event controller.
  *
  * @Route("admin/event")
+ * @Security("has_role('ROLE_ADMIN')")
  */
 class EventController extends Controller
 {
@@ -19,6 +21,7 @@ class EventController extends Controller
      * Lists all event entities.
      *
      * @Route("/", name="admin_event_index")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction()
@@ -36,6 +39,7 @@ class EventController extends Controller
      * Creates a new event entity.
      *
      * @Route("/new", name="event_new")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -62,6 +66,7 @@ class EventController extends Controller
      * Finds and displays a event entity.
      *
      * @Route("/{id}", name="event_show", requirements={"id": "\d+"})
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function showAction(Event $event)
@@ -78,6 +83,7 @@ class EventController extends Controller
      * Displays a form to edit an existing event entity.
      *
      * @Route("/{id}/edit", name="event_edit", requirements={"id": "\d+"})
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Event $event)
@@ -103,6 +109,7 @@ class EventController extends Controller
      * Deletes a event entity.
      *
      * @Route("/{id}", name="event_delete", requirements={"id": "\d+"})
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Event $event)

@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Commentary;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Commentary controller.
  *
  * @Route("/admin/commentary")
+ * @Security("has_role('ROLE_ADMIN')")
  */
 class CommentaryController extends Controller
 {
@@ -19,6 +21,7 @@ class CommentaryController extends Controller
      * Lists all commentary entities.
      *
      * @Route("/", name="admin_commentary_index")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction()
@@ -36,6 +39,7 @@ class CommentaryController extends Controller
      * Creates a new commentary entity.
      *
      * @Route("/new", name="commentary_new")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -62,6 +66,7 @@ class CommentaryController extends Controller
      * Finds and displays a commentary entity.
      *
      * @Route("/{id}", name="commentary_show", requirements={"id": "\d+"})
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function showAction(Commentary $commentary)
@@ -78,6 +83,7 @@ class CommentaryController extends Controller
      * Displays a form to edit an existing commentary entity.
      *
      * @Route("/{id}/edit", name="commentary_edit", requirements={"id": "\d+"})
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Commentary $commentary)
@@ -103,6 +109,7 @@ class CommentaryController extends Controller
      * Deletes a commentary entity.
      *
      * @Route("/{id}", name="commentary_delete", requirements={"id": "\d+"})
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Commentary $commentary)

@@ -9,7 +9,7 @@
                 <a class="btn btn-light" href="{{ path('homePage') }}">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="btn btn-light" href="{{ path("user_event_index") }}">Event <span class="sr-only">(current)</span></a>
+                <a class="btn btn-light" href="{{ path("user_event_index") }}">Events <span class="sr-only">(current)</span></a>
             </li>
 
             {% if is_granted("IS_AUTHENTICATED_FULLY") %}
@@ -23,7 +23,7 @@
                             <a class="dropdown-item" href="{{ path('dashboard') }}">Dashboard</a>
                         {% endif %}
                         <a class="dropdown-item" href="/logout">Log Out</a>
-                        <a class="dropdown-item" href="{{ path('user_account_edit', {'id': app.user.id}) }}">Modify my account</a>
+                        <a class="dropdown-item" href="{{ path('user_account_edit', {'id': app.user.id}) }}">Edit my account</a>
                     </div>
                 </div>
             {% else %}

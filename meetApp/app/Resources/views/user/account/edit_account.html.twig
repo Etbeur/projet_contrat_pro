@@ -5,7 +5,7 @@
 {% block body %}
     <div class="page-title">
         <div class="text-center">
-            <h3>Modify Account</h3>
+            <h3>Edit Account</h3>
         </div>
     </div>
     <div class="container text-center">
@@ -67,17 +67,15 @@
             <div class="ln_solid"></div>
             <div class="form-group">
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                    <input type="submit" value="Modifier" class="btn btn-success" />
-                    <a href="{{ path('homePage') }}" class="btn btn-primary pull-left" >Retour à la liste</a>
+                    <input type="submit" value="Edit" class="btn btn-success" />
+                    <a href="{{ path('homePage') }}" class="btn btn-primary pull-left" >Back to home</a>
                 </div>
             </div>
 
             {{ form_end(edit_form) }}
             <div class="container">
                 {{ form_start(delete_form) }}
-                <a href="{{ path('admin_user_index') }}">
-                    <input class="btn btn-danger" type="submit" value="Supprimer mon compte">
-                </a>
+                <a href="{{ path('user_account_show_delete', { 'id': app.user.id }) }}" class="btn btn-danger">Delete my account</a>
                 {{ form_end(delete_form) }}
             </div>
 

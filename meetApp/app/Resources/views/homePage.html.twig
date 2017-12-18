@@ -4,13 +4,26 @@
 
     {% block content %}
 
-        <div class="col-md-12 text-center">
-            <p>Bienvenue sur ce site d'évènements de rencontres <strong>{{ app.user }}</strong>. Ce site vous permet d'organiser ou de participer à des évènements afin de rencontrer d'autre personnes.</p>
-            <p>Rendez-vous dans l'onglet évènement pour voir les différents évènements disponible.</p>
+        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="col-md-12 text-center">
+                <p>Welcome to this website. Go to Events menu to see all events available.</p>
+                <p>Get <a href="/register">your account</a> now and create or participate at some events with other people.</p>
+            </div>
+        {% endif %}
 
-        {% if not is_granted('ROLE_ADMIN') %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="col-md-12 text-center">
+                <p>Welcome admin! You can go to your Dashboard now. Account --> Dashboard</p>
+            </div>
+        {% endif %}
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') and not is_granted('ROLE_ADMIN') %}
+            <div class="col-md-12 text-center">
+                <p>Welcome to this website <strong>{{ app.user }}</strong>. Here, you can see your created and selected events.</p>
+                <p>Go to Events menu to see all events available or to create events for other people.</p>
+
                  <div class="row event-card">
-                     <h2 class="text-center col-md-12">Voici vos évènement créés</h2>
+                     <h2 class="text-center col-md-12">Your created events</h2>
                      {% for event in events %}
                          {% if event.creators == app.user %}
                              <div class="col-md-4">
@@ -33,7 +46,7 @@
                  </div>
 
                 <div class="row event-card">
-                    <h2 class="text-center col-md-12">Voici les évènements auquels vous participez</h2>
+                    <h2 class="text-center col-md-12">Your selected events</h2>
                     {% for event in events %}
                         {% for participant in event.participants %}
                             {% if participant == app.user %}

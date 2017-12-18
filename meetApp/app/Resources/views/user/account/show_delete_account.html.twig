@@ -2,11 +2,11 @@
 
 {% block content %}
 
-    {% if not is_granted('ROLE_ADMIN') and event.creators == app.user %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <div class="text-center">
-            <p><strong>Do you really want to delete this event? This action is definitive!</strong></p>
+            <p><strong>Do you really want to delete your account? This action is definitive!</strong></p>
             {{ form_start(delete_form) }}
-            <a href="{{ path('homePage') }}" class="btn btn-primary">Back to the list</a>
+            <a href="{{ path('homePage') }}" class="btn btn-primary">Back to Home</a>
             <input type="submit" value="Delete" class="btn btn-danger">
             {{ form_end(delete_form) }}
         </div>

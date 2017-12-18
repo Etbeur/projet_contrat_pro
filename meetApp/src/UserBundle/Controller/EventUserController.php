@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  *
  * @Route("/event")
+ * @Security("has_role('ROLE_USER')")
  */
 class EventUserController extends Controller
 {
@@ -32,7 +33,8 @@ class EventUserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-            $events = $em->getRepository('AppBundle:Event')->eventDateAscendingOrder();
+        $events = $em->getRepository('AppBundle:Event')
+            ->eventDateAscendingOrder();
 
         return $this->render('user/event/index_event.html.twig', array(
             "events" => $events,
@@ -76,7 +78,7 @@ class EventUserController extends Controller
      * @Route("/{id}", name="user_event_show_delete", requirements={"id": "\d+"})
      * @Method("GET")
      */
-    public function showAction(Event $event)
+    public function showDeleteEventAction(Event $event)
     {
         $deleteForm = $this->createDeleteFormEvent($event);
 
@@ -86,13 +88,14 @@ class EventUserController extends Controller
         ));
     }
 
+
     /**
      * Displays a form to edit an existing event.
      * @Security("has_role('ROLE_USER')")
      * @Route("/{id}/edit", name="user_event_edit", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Event $event)
+    public function editUserEventAction(Request $request, Event $event)
     {
         $deleteForm = $this->createDeleteFormEvent($event);
         $editForm = $this->createForm('AppBundle\Form\EventType', $event);
@@ -111,30 +114,6 @@ class EventUserController extends Controller
         ));
     }
 
-    /**
-     * Displays a form to edit an existing account.
-     * @Security("has_role('ROLE_USER')")
-     * @Route("/{id}/profile", name="user_account_edit", requirements={"id": "\d+"})
-     * @Method({"GET", "POST"})
-     */
-    public function modifyAccontAction(Request $request, User $user)
-    {
-        $deleteForm = $this->createDeleteFormUser($user);
-        $editForm = $this->createForm('AppBundle\Form\UserType', $user);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('homePage');
-        }
-
-        return $this->render('user/account/edit_account.html.twig', array(
-            'user' => $user,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
 
     /**
      * Add choosen event in user event.
@@ -159,9 +138,7 @@ class EventUserController extends Controller
             ->getToken()
             ->getUser()
         ));
-
         $editForm->handleRequest($request);
-
 
         if ($editForm->isSubmitted() && $editForm->isValid() &&
             count($event->getParticipants()) <= $event->gettotalCapacity()) {
@@ -249,24 +226,6 @@ class EventUserController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('user_event_delete', array('id' => $event->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-            ;
-    }
-
-    /**
-     * Creates a form to delete a user.
-     *
-     * @param User $user
-     *
-     * @return \Symfony\Component\Form\Form The form
-     * @internal param User $user The user entity
-     *
-     */
-    private function createDeleteFormUser(User $user)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('user_delete', array('id' => $user->getId())))
             ->setMethod('DELETE')
             ->getForm()
             ;

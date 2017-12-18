@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Adress;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Adress controller.
  *
  * @Route("/admin/adress")
+ * @Security("has_role('ROLE_ADMIN')")
  */
 class AdressController extends Controller
 {
@@ -19,6 +21,7 @@ class AdressController extends Controller
      * Lists all adress entities.
      *
      * @Route("/", name="admin_adress_index")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction()
@@ -36,6 +39,7 @@ class AdressController extends Controller
      * Creates a new adress entity.
      *
      * @Route("/new", name="adress_new")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -62,6 +66,7 @@ class AdressController extends Controller
      * Finds and displays a adress entity.
      *
      * @Route("/{id}", name="adress_show", requirements={"id": "\d+"})
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function showAction(Adress $adress)
@@ -78,6 +83,7 @@ class AdressController extends Controller
      * Displays a form to edit an existing adress entity.
      *
      * @Route("/{id}/edit", name="adress_edit", requirements={"id": "\d+"})
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Adress $adress)
@@ -103,6 +109,7 @@ class AdressController extends Controller
      * Deletes a adress entity.
      *
      * @Route("/{id}", name="adress_delete", requirements={"id": "\d+"})
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Adress $adress)

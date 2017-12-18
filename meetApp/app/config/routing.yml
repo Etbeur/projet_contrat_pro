@@ -1,26 +1,26 @@
-app_event:
-    resource: "@AppBundle/Controller/EventController.php"
-    type:     annotation
-
-app_message:
-    resource: "@AppBundle/Controller/MessageController.php"
-    type:     annotation
-
-app_commentary:
-    resource: "@AppBundle/Controller/CommentaryController.php"
-    type:     annotation
-
-app_category:
-    resource: "@AppBundle/Controller/CategoryController.php"
-    type:     annotation
-
-app_adress:
-    resource: "@AppBundle/Controller/AdressController.php"
-    type:     annotation
-
-app_user:
-    resource: "@AppBundle/Controller/UserController.php"
-    type:     annotation
+#app_event:
+#    resource: "@AppBundle/Controller/EventController.php"
+#    type:     annotation
+#
+#app_message:
+#    resource: "@AppBundle/Controller/MessageController.php"
+#    type:     annotation
+#
+#app_commentary:
+#    resource: "@AppBundle/Controller/CommentaryController.php"
+#    type:     annotation
+#
+#app_category:
+#    resource: "@AppBundle/Controller/CategoryController.php"
+#    type:     annotation
+#
+#app_adress:
+#    resource: "@AppBundle/Controller/AdressController.php"
+#    type:     annotation
+#
+#app_user:
+#    resource: "@AppBundle/Controller/UserController.php"
+#    type:     annotation
 
 user:
     resource: "@UserBundle/Controller/"
