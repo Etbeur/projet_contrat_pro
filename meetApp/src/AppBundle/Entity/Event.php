@@ -368,4 +368,21 @@ class Event
     {
         $this->commentary->removeElement($commentary);
     }
+
+    /**
+     * Check if user is registered to an event
+     *
+     * @param User $participant
+     *
+     * @return bool
+     */
+    public function isRegistered(User $participant)
+    {
+        foreach ($this->participants as $key => $value) {
+            if ($value->getId() == $participant->getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

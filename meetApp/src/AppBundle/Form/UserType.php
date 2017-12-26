@@ -27,7 +27,7 @@ class UserType extends AbstractType
             ->add('age')
         ;
     }
-    
+
     /**
      * {@inheritdoc}
      */

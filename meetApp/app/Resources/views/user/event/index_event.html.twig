@@ -9,6 +9,7 @@
 
     <div class="row event-card">
         {% for event in events %}
+            {% if event.date|date('d/M/y') >= date().date|date('d/M/y') %}
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-block text-center">
@@ -20,14 +21,19 @@
                         <p><strong>Organiser:</strong> {{ event.creators }}</p>
                         <p><strong>Date:</strong> {{ event.date|date('d/m/Y H:i:s') }}</p>
                         <input type="hidden" value="{{ event.id }}">
-                        {% if event.creators != app.user and not is_granted('ROLE_ADMIN') and (event.totalCapacity - event.participants|length) > 0 %}
+                        {% if event.creators != app.user and not is_granted('ROLE_ADMIN')
+                            and (event.totalCapacity - event.participants|length) > 0
+                            and event.isRegistered(app.user) == false %}
                             <a href="{{ path('user_event_add', { 'id': event.id }) }}" class="glyphicon glyphicon-plus btn btn-success"></a>
                         {% elseif (event.totalCapacity - event.participants|length) == 0 %}
                             <a href="{{ path('user_event_add', { 'id': event.id }) }}" class="glyphicon glyphicon-plus btn btn-danger full"></a>
+                        {% elseif  event.isRegistered(app.user) == true %}
+                            <p class="col-md-12 col-xs-12 btn btn-info">Vous participez à cet événement</p>
                         {% endif %}
                     </div>
                 </div>
             </div>
+            {% endif %}
         {% endfor %}
     </div>
 

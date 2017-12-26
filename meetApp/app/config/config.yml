@@ -75,8 +75,16 @@ fos_user:
     firewall_name: main
     user_class: AppBundle\Entity\User
     from_email:
-        address: "%mailer_user%"
-        sender_name: "%mailer_user%"
+        address: "meetappfr@gmail.com" #adresse qui envoie les mails d'inscription
+        sender_name: "Meet'App"
     registration:
+        form:
+          type: AppBundle\Form\UserType
+        confirmation:
+          enabled: true
+          template: FOSUserBundle:Registration:email.txt.twig
+    resetting:
+        email:
+          template: FOSUserBundle:Resetting:email.txt.twig
         form:
             type: AppBundle\Form\UserType
