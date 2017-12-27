@@ -75,7 +75,7 @@ fos_user:
     firewall_name: main
     user_class: AppBundle\Entity\User
     from_email:
-        address: "meetappfr@gmail.com" #adresse qui envoie les mails d'inscription
+        address: "admin@meetapp.fr" #adresse qui envoie les mails d'inscription
         sender_name: "Meet'App"
     registration:
         form:

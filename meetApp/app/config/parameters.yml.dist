@@ -11,12 +11,12 @@ parameters:
     # database_path: "%kernel.root_dir%/data.db3"
 
     #Mailer
-    mailer_transport: gmail
-    mailer_host: smtp.gmail.com
-    mailer_user: meetappfr@gmail.com
-    mailer_password: Events2018
-    mailer_port: 465
+    mailer_transport: transport
+    mailer_host: smtp.name
+    mailer_user: usermail
+    mailer_password: password
+    mailer_port: port number
     mailer_encryption: ssl
 
     # A secret key that's used to generate certain security-related tokens
-    secret: 09cf558d06f4894ba64e32b7ebb8abea460d9209
+    secret: #SecretKey#
