@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="{{ _charset }}" />
+        <title>
+            An Error Occurred: {{ status_text }}
+            Une erreur s'est produite {{ status_text }}
+        </title>
+    </head>
+    <body>
+        <h1>Hoo nooonn!</h1>
+        <h2>
+            Server returned a {{ status_code }} error status code.<br>
+            <br>
+            Le serveur retourne une erreur "{{ status_code }}".
+        </h2>
+        <hr>
+        <div>
+            Something is broken. Please e-mail us at admin@meetapp.fr and let us know
+            what you were doing when this error occurred. We will fix it as soon
+            as possible. Sorry for any inconvenience caused.<br>
+            <br>
+            Une ereur s'est produite! Merci de nous contacter à admin@meetapp.fr afin de nous expliquer ce que vous faisiez lorsque l'erreur est apparue.
+            Nous faisons notre possible pour que tout revienne à la normale le plus vite possible..
+            Veuillez nous excuser pour la gène occasionée!
+
+            A très vite sur Meet'App.
+        </div>
+    </body>
+</html>

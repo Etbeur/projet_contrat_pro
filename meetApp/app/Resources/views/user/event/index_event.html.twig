@@ -9,7 +9,7 @@
 
     <div class="row event-card">
         {% for event in events %}
-            {% if event.date|date('d/M/y') >= date().date|date('d/M/y') %}
+            {% if event.date >= date() %}
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-block text-center">

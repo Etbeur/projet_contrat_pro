@@ -35,6 +35,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => User::class,
+            'intention' => 'task_form',
         ));
     }
 

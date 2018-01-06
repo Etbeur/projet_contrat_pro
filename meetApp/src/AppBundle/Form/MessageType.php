@@ -22,7 +22,8 @@ class MessageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Message'
+            'data_class' => 'AppBundle\Entity\Message',
+            'intention' => 'task_form',
         ));
     }
 

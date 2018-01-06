@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: romain
- * Date: 20/09/17
- * Time: 16:39
- */
 
 namespace AppBundle\Controller;
 
@@ -22,10 +16,6 @@ class DashboardController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-//        $nbAdress   = $em->getRepository('AppBundle:Adress')->findAll();
-//        $nbCategory   = $em->getRepository('AppBundle:Category')->findAll();
-//        $nbCommentary   = $em->getRepository('AppBundle:Commentary')->findAll();
-//        $nbMessage   = $em->getRepository('AppBundle:Message')->findAll();
         $nbEvents   = $em->getRepository('AppBundle:Event')->findAll();
         $nbUsers = $em->getRepository('AppBundle:User')->findAll();
 

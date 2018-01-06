@@ -8,6 +8,15 @@
             <div class="col-md-12 text-center">
                 <p>Welcome to this website. Go to Events menu to see all events available.</p>
                 <p>Get <a href="/register">your account</a> now and create or participate in some events with other people.</p>
+
+                <div class="alert alert-success">
+                    <strong>New features or bug corrections V1.1 on {{ date()|date('d M y')}}  :</strong>
+                    <p>- Menu is now on the left side of the top-bar</p>
+                    <p>- You can see people who participate to your event created or selected</p>
+                    <p>- On the home page, you see if an event is past or not </p>
+                    <p>- Fix bug of date, event is now visible correctly</p>
+                    <p><strong>Thanks to all users who give me their feedbacks</strong></p>
+                </div>
             </div>
         {% endif %}
 
@@ -22,6 +31,14 @@
                 <p>Welcome to this website <strong>{{ app.user }}</strong>. Here, you can see your created and selected events.</p>
                 <p>Go to Events menu to see all events available or to create events for other people.</p>
 
+                <div class="alert alert-success">
+                    <strong>New features or bug corrections V1.1 on {{ date()|date('d M y')}}  :</strong>
+                    <p>- Menu is now on the left side of the top-bar</p>
+                    <p>- You can see people who participate to your event created or selected</p>
+                    <p>- On the home page, you see if an event is past or not </p>
+                    <p>- Fix bug of date, event is now visible correctly</p>
+                    <p><strong>Thanks to all users who give me their feedbacks</strong></p>
+                </div>
                  <div class="row event-card">
                      <h2 class="text-center col-md-12">Your created events</h2>
                      {% for event in events %}
@@ -35,9 +52,34 @@
                                          <p><strong>Total Capacity:</strong> {{ event.totalCapacity }}</p>
                                          <p><strong>Inscription:</strong> {{ event.participants|length}}</p>
                                          <p><strong>Date:</strong> {{ event.date|date('d/m/Y H:i:s') }}</p>
-                                         {#<p >{{ event.id }}</p>#}
-                                         <a href="{{ path('user_event_show_delete', { 'id': event.id }) }}" class="glyphicon glyphicon-minus btn btn-danger"></a>
-                                         <a href="{{ path('user_event_edit', { 'id': event.id }) }}" class="glyphicon glyphicon-pencil btn btn-info"></a>
+                                         {% if event.date >= date() %}
+                                             <a href="{{ path('user_event_show_delete', { 'id': event.id }) }}" class="glyphicon glyphicon-minus btn btn-danger"></a>
+                                             <a href="{{ path('user_event_edit', { 'id': event.id }) }}" class="glyphicon glyphicon-pencil btn btn-info"></a>
+                                             <div class="dropdown">
+                                                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                     Who's participate
+                                                 </button>
+                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                     <div class="alert alert-info text-center"><strong>You</strong></div>
+                                                     {% for participant in event.participants %}
+                                                         <div class="alert alert-info text-center"><strong>{{ participant }}</strong></div>
+                                                     {% endfor %}
+                                                 </div>
+                                             </div>
+                                         {% else %}
+                                            <p class="btn btn-warning">Past Event</p>
+                                             <div class="dropdown">
+                                                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                     Who's participated
+                                                 </button>
+                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                     <div class="alert alert-info text-center"><strong>You</strong></div>
+                                                     {% for participant in event.participants %}
+                                                         <div class="alert alert-info text-center"><strong>{{ participant }}</strong></div>
+                                                     {% endfor %}
+                                                 </div>
+                                             </div>
+                                         {% endif %}
                                      </div>
                                  </div>
                              </div>
@@ -59,7 +101,39 @@
                                             <p><strong>Total Capacity:</strong> {{ event.totalCapacity }}</p>
                                             <p><strong>Inscription:</strong> {{ event.participants|length}}</p>
                                             <p><strong>Date:</strong> {{ event.date|date('d/m/Y H:i:s') }}</p>
-                                            <a href="{{ path('user_event_remove', { 'id': event.id }) }}" class="glyphicon glyphicon-minus btn btn-danger"></a>
+                                            {% if event.date >= date() %}
+                                                <a href="{{ path('user_event_remove', { 'id': event.id }) }}" class="glyphicon glyphicon-minus btn btn-danger"></a>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Who's participate
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        {% for participant in event.participants %}
+                                                            {% if participant == app.user %}
+                                                                <div class="alert alert-info text-center"><strong>You</strong></div>
+                                                            {% else %}
+                                                            <div class="alert alert-info text-center"><strong>{{ participant }}</strong></div>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            {% else %}
+                                                <p class="btn btn-warning">Past Event</p>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Who's participated
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        {% for participant in event.participants %}
+                                                            {% if participant == app.user %}
+                                                                <div class="alert alert-info text-center"><strong>You</strong></div>
+                                                            {% else %}
+                                                                <div class="alert alert-info text-center"><strong>{{ participant }}</strong></div>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>

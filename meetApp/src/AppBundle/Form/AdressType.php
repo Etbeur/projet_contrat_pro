@@ -22,7 +22,8 @@ class AdressType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Adress'
+            'data_class' => 'AppBundle\Entity\Adress',
+            'intention' => 'task_form',
         ));
     }
 

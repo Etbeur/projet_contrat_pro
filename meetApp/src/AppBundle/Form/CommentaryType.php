@@ -31,7 +31,8 @@ class CommentaryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Commentary'
+            'data_class' => 'AppBundle\Entity\Commentary',
+            'intention' => 'task_form',
         ));
     }
 
